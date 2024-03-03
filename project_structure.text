@@ -1,0 +1,20 @@
+- .gitignore
+- fonts
+  - Schoolbell-Regular.ttf
+- index.html
+- package-lock.json
+- package.json
+- public
+  - vite.svg
+- README.md
+- src
+  - App.vue
+  - assets
+    - vue.svg
+  - components
+    - CheckoutComponent.vue
+    - ClassesComponent.vue
+    - ParentComponent.vue
+  - main.js
+  - style.css
+- vite.config.js

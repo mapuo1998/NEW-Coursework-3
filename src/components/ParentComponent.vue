@@ -27,12 +27,15 @@
 
             <!-- Shopping cart and lessons section -->
             <div class="right-panel">
+                <!-- <CheckoutComponent v-if="showCart" :cartItems="cartItems" :name="name" :phone="phone" @remove="removeFromCart" @checkout="checkout"
+                    @empty-cart="emptyCart" /> -->
+                    
+                <CheckoutComponent v-if="showCart" :cartItems="cartItems" @remove="removeFromCart" @checkout="handleCheckout" @empty-cart="emptyCart" />
 
-                <CheckoutComponent v-if="showCart" :cartItems="cartItems" @remove="removeFromCart" @checkout="checkout"
-                    @empty-cart="emptyCart" />
+
+
                 <ClassesComponent :searchTerm="searchTerm" :lessons="filteredLessons" @add="addToCart"
                     @search="searchTerm = $event" v-else />
-
 
                 <div class="view-cart">
                     <button @click="toggleCartView" :disabled="!showCart && cartItems.length === 0">
@@ -43,7 +46,7 @@
         </div>
     </div>
 </template>
-  
+
 <script>
 import CheckoutComponent from './CheckoutComponent.vue';
 import ClassesComponent from './ClassesComponent.vue';
@@ -65,7 +68,6 @@ export default {
             cartItems: [],
             name: "",
             phone: "",
-            isOrderSubmitted: false,
             nameErr: false,
             phoneErr: false,
             selSortAttr: "title",
@@ -151,11 +153,12 @@ export default {
                 this.cartItems.push({ ...lessonInCart });
 
                 // Update the spaces in the lessons array for the corresponding lesson
-                this.lessons.map(lessonInLessonsArray => {
+                this.lessons = this.lessons.map(lessonInLessonsArray => {
                     if (lessonInLessonsArray._id === lessonInCart._id) {
-                        lessonInLessonsArray.spaces = lessonInCart.spaces
+                        return { ...lessonInLessonsArray, spaces: lessonInCart.spaces };
                     }
-                })
+                    return lessonInLessonsArray;
+                });
             }
 
             this.updateCheckoutButton();
@@ -205,20 +208,29 @@ export default {
                 this.cartItems.length > 0;
         },
         // Checkout process
-        async checkout() {
-            if (this.canCheckout) {
-                const phoneInt = parseInt(this.phone);
+        handleCheckout(data) {
+            this.name = data.name;
+        this.phone = data.phone;
+
+        // Then proceed with the checkout process or any other actions
+        this.checkout();
+
+        }
+,        async checkout() {
+
+
+            if (!this.canCheckout || this.canCheckout) {
+                const phoneInt = Number(this.phone);
 
                 const orderData = {
                     name: this.name,
-                    phone: phoneInt,
+                    phone: this.phone,
                     cartItems: this.cartItems.map((item) => ({
                         title: item.title,
                         spaces: item.spaces,
                     })),
                 };
 
-                console.log('Order Data:', orderData);
 
                 try {
                     const response = await fetch(this.api + "/orders", {
@@ -231,7 +243,8 @@ export default {
                         // Call the new PUT route to update available spaces
                         await this.updateAvailableSpaces(orderData.cartItems);
 
-                        // Rest of the code...
+                        alert("Thank You for your order, click OK to go the Home page.");
+                        location.reload();
                     } else {
                         console.error("Error during checkout:", response.statusText);
                         alert("Error during checkout. Please try again.");
@@ -262,9 +275,6 @@ export default {
                     body: JSON.stringify({ cartItems }),
                 });
 
-                alert("Thank You for your order, click OK to go the Home page.")
-                location.reload()
-
                 if (!response.ok) {
                     console.error("Error updating available spaces:", response.statusText);
                     // Handle error as needed
@@ -276,15 +286,19 @@ export default {
         },
         // Get the latest order ID
         async getLatestOrderId() {
-            const response = await fetch(this.api + "/orders");
-            const orders = await response.json();
-            return orders.length > 0 ? orders[orders.length - 1]._id : null;
+            try {
+                const response = await fetch(this.api + "/orders");
+                const orders = await response.json();
+                return orders.length > 0 ? orders[orders.length - 1]._id : null;
+            } catch (error) {
+                console.error("Error fetching latest order ID:", error);
+                return null;
+            }
         },
     },
 };
 </script>
-  
+
 <style scoped>
 /* Add your styles here */
 </style>
-  

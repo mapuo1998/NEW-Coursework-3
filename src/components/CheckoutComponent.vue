@@ -39,6 +39,14 @@ export default {
             type: Array,
             default: () => [],
         },
+        name: {
+            type: String,
+            default: ""
+        },
+        phone: {
+            type: String,
+            default: ""
+        },
     },
     computed: {
         canCheckout() {
@@ -67,6 +75,7 @@ export default {
                 this.$emit('checkout', { name: this.name, phone: this.phone });
             }
         },
+        
         emptyCart() {
             // Emit an event to empty the cart
             this.$emit('empty-cart');
