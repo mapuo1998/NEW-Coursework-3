@@ -1,0 +1,232 @@
+@font-face {
+  font-family: 'Schoolbell';
+  src: url('./fonts/Schoolbell-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body,
+ul,
+li,
+.left-panel div {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body {
+  font-family: 'Schoolbell', Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app-title {
+  display: flex;
+  align-items: center;
+}
+
+.school-icon {
+  width: 60px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+#app {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.main-container {
+  width: 1000px;
+  display: flex;
+  flex-direction: row;
+}
+
+.left-panel {
+  width: 25%;
+  padding: 20px;
+  background-color: #f5f5f5;
+  margin-right: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  flex-direction: column;
+}
+
+.left-panel label,
+.left-panel select,
+.left-panel input {
+  margin-bottom: 30px;
+  font-size: 25px;
+}
+
+.right-panel {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.view-cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  bottom: 0;
+  margin-bottom: 1rem;
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.view-cart button,
+.cart button.back-to-lessons-button {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.view-cart button:hover,
+.cart button.back-to-lessons-button:hover {
+  background-color: #45A844;
+}
+
+.cart {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+.cart h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.cart label,
+.cart select,
+.cart input {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.cart .error {
+  color: #ff0000;
+  font-size: 14px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.cart button.checkout-button,
+.cart button.empty-cart-button {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Make the "Empty Cart" button red */
+.cart button.empty-cart-button {
+  background-color: #FF0000;
+}
+
+.cart button.checkout-button:hover {
+  background-color: #45A844;
+}
+
+.cart button.checkout-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.cart button {
+  background-color: #f4f4f4;
+  color: #000;
+  border: 1px solid #ddd;
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.search input {
+  width: 90%;
+  padding: 10px;
+  font-size: 25px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.search ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.search li {
+  width: 20%;
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.search li:hover {
+  transform: scale(1.05);
+}
+
+.search li button {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  font-size: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search li button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.lesson-icon {
+  width: 80px;
+  height: 80px;
+}
