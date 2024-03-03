@@ -27,8 +27,6 @@
 
             <!-- Shopping cart and lessons section -->
             <div class="right-panel">
-                <!-- <CheckoutComponent v-if="showCart" :cartItems="cartItems" :name="name" :phone="phone" @remove="removeFromCart" @checkout="checkout"
-                    @empty-cart="emptyCart" /> -->
                     
                 <CheckoutComponent v-if="showCart" :cartItems="cartItems" @remove="removeFromCart" @checkout="handleCheckout" @empty-cart="emptyCart" />
 
