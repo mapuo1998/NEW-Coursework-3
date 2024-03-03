@@ -47,7 +47,7 @@ export default {
                 Chemistry: "chemistry-icon.svg",
                 Geography: "geography-icon.svg",
             };
-            return "http://afterschoolapp-env.eba-pyudtvba.us-east-1.elasticbeanstalk.com/images/" + imgMap[title] || "";
+            return "https://afterschoolapp-env.eba-pyudtvba.us-east-1.elasticbeanstalk.com/images/" + imgMap[title] || "";
         },
     }
 };

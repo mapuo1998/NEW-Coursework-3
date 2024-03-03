@@ -64,7 +64,7 @@ export default {
                 { id: "sortPrice", value: "price", label: "Price" },
                 { id: "sortSpaces", value: "spaces", label: "Availability" },
             ],
-            api: "http://afterschoolapp-env.eba-pyudtvba.us-east-1.elasticbeanstalk.com/api",
+            api: "https://afterschoolapp-env.eba-pyudtvba.us-east-1.elasticbeanstalk.com/api",
             cartItems: [],
             name: "",
             phone: "",
