@@ -6,7 +6,7 @@ import vue2 from '@vitejs/plugin-vue2'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/New-Coursework-3-CST3145/',
+  base: '/NEW-Coursework-3-CST3145/',
   plugins: [
     vue2(),
     legacy({
