@@ -1,7 +1,7 @@
 <template>
     <div class="parent-component">
         <h1 class="app-title">
-            <img src="https://afterschoolapp-env.eba-pyudtvba.us-east-1.elasticbeanstalk.com/images/school-icon.svg"
+            <img src="http://afterschoolapp-env.eba-pyudtvba.us-east-1.elasticbeanstalk.com/images/school-icon.svg"
                 alt="School Icon" class="school-icon"> After School App
         </h1>
         <div class="main-container">
@@ -61,7 +61,7 @@ export default {
                 { id: "sortPrice", value: "price", label: "Price" },
                 { id: "sortSpaces", value: "spaces", label: "Availability" },
             ],
-            api: "https://afterschoolapp-env.eba-pyudtvba.us-east-1.elasticbeanstalk.com/api",
+            api: "http://afterschoolapp-env.eba-pyudtvba.us-east-1.elasticbeanstalk.com/api",
             cartItems: [],
             name: "",
             phone: "",
