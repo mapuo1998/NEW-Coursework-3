@@ -1,0 +1,38 @@
+{
+  "name": "After School App",
+  "short_name": "After School App",
+  "description": "After School App",
+  "icons": [
+    {
+      "src": "./school-icon-top-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "./school-icon-top-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "index.html",
+  "display": "fullscreen",
+  "background_color": "#00c9eb",
+  "theme_color": "#00c9eb",
+  "orientation": "portrait",
+  "screenshots": [
+    {
+      "src": "./school-icon-top-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Wonder Widgets"
+    },
+    {
+      "src": "./school-icon-top-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Wonder Widgets"
+    }
+  ]
+}
