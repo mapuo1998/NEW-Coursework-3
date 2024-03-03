@@ -23,6 +23,11 @@
                     <input type="radio" id="descSort" v-model="selSortOrder" value="desc">
                     <label for="descSort">Descending</label>
                 </div>
+                <div>
+                    <a :href="this.api">
+                        <button>API Link</button>
+                    </a>
+                </div>
             </div>
 
             <!-- Shopping cart and lessons section -->
