@@ -1,7 +1,7 @@
 <template>
     <div class="parent-component">
         <h1 class="app-title">
-            <img src="http://afterschoolapp-env.eba-pyudtvba.us-east-1.elasticbeanstalk.com/images/school-icon.svg"
+            <img src="https://afterschoolapp-env.eba-pyudtvba.us-east-1.elasticbeanstalk.com/images/school-icon.svg"
                 alt="School Icon" class="school-icon"> After School App
         </h1>
         <div class="main-container">
