@@ -24,7 +24,7 @@
                     <label for="descSort">Descending</label>
                 </div>
                 <div>
-                    <a :href="this.api">
+                    <a :href="api">
                         <button>API Link</button>
                     </a>
                 </div>
@@ -32,14 +32,18 @@
 
             <!-- Shopping cart and lessons section -->
             <div class="right-panel">
+                <component :is="currentUI"
+                    :cartItems="cartItems"
+                    @remove="removeFromCart"
+                    @checkout="handleCheckout"
+                    :api="api"
+                    :searchTerm="searchTerm"
+                    :lessons="filteredLessons"
+                    @add="addToCart"
+                    @search="searchTerm = $event"
+                    @empty-cart="emptyCart"
+                />
                     
-                <CheckoutComponent v-if="showCart" :cartItems="cartItems" @remove="removeFromCart" @checkout="handleCheckout" @empty-cart="emptyCart" />
-
-
-
-                <ClassesComponent :searchTerm="searchTerm" :lessons="filteredLessons" @add="addToCart"
-                    @search="searchTerm = $event" v-else />
-
                 <div class="view-cart">
                     <button @click="toggleCartView" :disabled="!showCart && cartItems.length === 0">
                         {{ showCart ? 'Back to Lessons' : (cartItems.length === 0 ? 'Cart is Empty' : 'View Cart') }}
@@ -96,6 +100,9 @@ export default {
                 );
             });
         },
+        currentUI() {
+            return this.showCart ? 'CheckoutComponent' : 'ClassesComponent';
+        }
     },
     // Fetch classes from the API when the component is created
     created() {
@@ -103,14 +110,14 @@ export default {
     },
     watch: {
         searchTerm() {
-            this.searchClasses()
+            this.searchClasses();
         }
     },
     methods: {
         // Fetch classes from the API
         async fetchClasses() {
             try {
-                const response = await fetch(this.api + `/classes`);
+                const response = await fetch(`${this.api}/classes`);
                 const data = await response.json();
                 console.log("Fetched data:", data);
                 this.lessons = data;
@@ -120,7 +127,7 @@ export default {
         },
         async searchClasses() {
             try {
-                const response = await fetch(this.api + `/search?searchFor=${this.searchTerm}`);
+                const response = await fetch(`${this.api}/search?searchFor=${this.searchTerm}`);
                 const searchData = await response.json();
 
                 // Check if items are already in the cart
@@ -213,13 +220,12 @@ export default {
         // Checkout process
         handleCheckout(data) {
             this.name = data.name;
-        this.phone = data.phone;
+            this.phone = data.phone;
 
-        // Then proceed with the checkout process or any other actions
-        this.checkout();
-
-        }
-,        async checkout() {
+            // Then proceed with the checkout process or any other actions
+            this.checkout();
+        },
+        async checkout() {
 
 
             if (!this.canCheckout || this.canCheckout) {
