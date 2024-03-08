@@ -30,41 +30,40 @@ body {
 }
 
 #app {
-  max-width: 1200px;
-  width: 100%;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 auto;
+  margin: 0;
   padding: 20px;
 }
 
 .main-container {
-  width: 1000px;
+  width: 100%;
+  max-width: 1000px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .left-panel {
-  width: 25%;
+  width: 100%;
   padding: 20px;
   background-color: #f5f5f5;
-  margin-right: 20px;
+  margin-bottom: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  flex-direction: column;
 }
 
 .left-panel label,
 .left-panel select,
 .left-panel input {
-  margin-bottom: 30px;
-  font-size: 25px;
+  margin-bottom: 20px;
+  font-size: 20px;
 }
 
 .right-panel {
-  width: 75%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -76,10 +75,11 @@ body {
   justify-content: center;
   position: sticky;
   bottom: 0;
-  margin-bottom: 1rem;
+  width: 100%;
   background: white;
   padding: 1rem;
   border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 .view-cart button,
@@ -92,11 +92,6 @@ body {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-}
-
-.view-cart button:hover,
-.cart button.back-to-lessons-button:hover {
-  background-color: #45A844;
 }
 
 .cart {
@@ -140,7 +135,6 @@ body {
   transition: background-color 0.3s ease;
 }
 
-/* Make the "Empty Cart" button red */
 .cart button.empty-cart-button {
   background-color: #FF0000;
 }
@@ -175,9 +169,9 @@ body {
 }
 
 .search input {
-  width: 90%;
+  width: calc(100% - 40px);
   padding: 10px;
-  font-size: 25px;
+  font-size: 20px;
   text-align: center;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -191,9 +185,9 @@ body {
 }
 
 .search li {
-  width: 20%;
+  width: calc(50% - 20px);
   background-color: #fff;
-  padding: 20px;
+  padding: 5px;
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -219,8 +213,27 @@ body {
   background-color: #ccc;
   cursor: not-allowed;
 }
-
 .lesson-icon {
   width: 80px;
   height: 80px;
+}
+
+@media screen and (min-width: 768px) {
+  .main-container {
+    flex-direction: row;
+  }
+
+  .left-panel {
+    width: 25%;
+    margin-right: 20px;
+  }
+
+  .right-panel {
+    width: 75%;
+    margin-inline: auto;
+  }
+
+  .search li {
+    width: calc(40% - 20px); 
+  }
 }
