@@ -1,13 +1,13 @@
 <template>
     <div class="search">
-        <!-- Search input and lessons show if showCart false -->
+        <!-- search input and lessons -->
         <div class="search-bar">
             <div class="search-input">
                 <input :value="searchTerm" placeholder="Search Lessons.." @input="$emit('search', $event.target.value)">
             </div>
         </div>
         <ul>
-            <!-- Filtered lessons -->
+            <!-- filtered lessons -->
             <li v-for="lesson in lessons" :key="lesson.id">
                 <div class="lesson-info">
                     <img :src="getLessonImage(lesson.title)" :alt="lesson.title + ' Icon'" class="lesson-icon">
@@ -33,7 +33,7 @@ export default {
     props: ['lessons', 'searchTerm'],
     methods: {
 
-        // Get lesson image based on title
+        // get lesson image based on title
         getLessonImage(title) {
             const imgMap = {
                 Maths: "math-icon.svg",

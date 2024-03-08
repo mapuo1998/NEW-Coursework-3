@@ -71,13 +71,13 @@ export default {
         },
         checkout() {
             if (this.canCheckout) {
-                // Emit an event to trigger the checkout process
+                //event to trigger checkout
                 this.$emit('checkout', { name: this.name, phone: this.phone });
             }
         },
         
         emptyCart() {
-            // Emit an event to empty the cart
+            // event to empty cart
             this.$emit('empty-cart');
         },
     },

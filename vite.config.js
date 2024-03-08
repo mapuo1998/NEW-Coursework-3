@@ -1,10 +1,8 @@
 import { fileURLToPath, URL } from 'node:url'
-
 import { defineConfig } from 'vite'
 import legacy from '@vitejs/plugin-legacy'
 import vue2 from '@vitejs/plugin-vue2'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   base: '/NEW-Coursework-3-CST3145/',
   plugins: [

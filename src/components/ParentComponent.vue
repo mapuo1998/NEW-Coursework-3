@@ -87,10 +87,10 @@ export default {
         };
     },
     computed: {
-        // Filter and sort lessons
+        // filter and sort lessons
         filteredLessons() {
             if (this.searchTerm.trim() !== '') {
-                return this.sortLessons(this.searchResults); // Use the same sorting logic for searchResults
+                return this.sortLessons(this.searchResults); // use the same sorting logic for searchResults
             }
             return this.sortLessons(this.lessons).filter((lesson) => {
                 const lowerCaseSearchTerm = this.searchTerm.toLowerCase();
@@ -104,7 +104,7 @@ export default {
             return this.showCart ? 'CheckoutComponent' : 'ClassesComponent';
         }
     },
-    // Fetch classes from the API when the component is created
+    // fetch classes from the API
     created() {
         this.fetchClasses();
     },
@@ -114,7 +114,7 @@ export default {
         }
     },
     methods: {
-        // Fetch classes from the API
+        // fetch classes from the API
         async fetchClasses() {
             try {
                 const response = await fetch(`${this.api}/classes`);
@@ -130,7 +130,7 @@ export default {
                 const response = await fetch(`${this.api}/search?searchFor=${this.searchTerm}`);
                 const searchData = await response.json();
 
-                // Check if items are already in the cart
+                // check if items are already in the cart
                 const cartItemTitles = this.cartItems.map(item => item.title);
                 this.searchResults = searchData.map(item => {
                     const lastIndex = cartItemTitles.lastIndexOf(item.title);
@@ -141,7 +141,7 @@ export default {
                 console.error('Error searching classes:', error);
             }
         },
-        // Sort lessons
+        // sort lessons
         sortLessons(lessons) {
             return lessons.slice().sort((a, b) => {
                 const attr = this.selSortAttr;
@@ -156,13 +156,13 @@ export default {
                 return (a[attr] < b[attr] ? -1 : 1) * order;
             });
         },
-        // Add a lesson to the cart
+        // add lesson to the cart
         addToCart(lessonInCart) {
             if (lessonInCart.spaces > 0) {
                 lessonInCart.spaces -= 1;
                 this.cartItems.push({ ...lessonInCart });
 
-                // Update the spaces in the lessons array for the corresponding lesson
+                // update the spaces in the lessons array
                 this.lessons = this.lessons.map(lessonInLessonsArray => {
                     if (lessonInLessonsArray._id === lessonInCart._id) {
                         return { ...lessonInLessonsArray, spaces: lessonInCart.spaces };
@@ -173,7 +173,7 @@ export default {
 
             this.updateCheckoutButton();
         },
-        // Remove a lesson from the cart
+        // remove lesson from cart
         removeFromCart(index) {
             const item = this.cartItems[index];
             this.cartItems.splice(index, 1);
@@ -183,7 +183,7 @@ export default {
             }
             this.updateCheckoutButton();
         },
-        // Empty the shopping cart
+        // empty shopping cart
         emptyCart() {
             for (const item of this.cartItems) {
                 const lesson = this.lessons.find((lesson) => lesson.title === item.title);
@@ -194,21 +194,21 @@ export default {
             this.cartItems = [];
             this.updateCheckoutButton();
         },
-        // Toggle between cart and lessons view
+        // toggle between cart and lessons view
         toggleCartView() {
             this.showCart = !this.showCart;
         },
-        // Validate name input
+        // validate name input
         validateName() {
             this.nameErr = !/^[A-Za-z\s]+$/.test(this.name);
             this.updateCheckoutButton();
         },
-        // Validate phone input
+        // validate phone input
         validatePhone() {
             this.phoneErr = !/^\d+$/.test(this.phone);
             this.updateCheckoutButton();
         },
-        // Update checkout button status
+        // update checkout button
         updateCheckoutButton() {
             this.canCheckout =
                 this.name.length > 0 &&
@@ -217,17 +217,14 @@ export default {
                 !this.phoneErr &&
                 this.cartItems.length > 0;
         },
-        // Checkout process
+        // checkout process
         handleCheckout(data) {
             this.name = data.name;
             this.phone = data.phone;
-
-            // Then proceed with the checkout process or any other actions
             this.checkout();
         },
+
         async checkout() {
-
-
             if (!this.canCheckout || this.canCheckout) {
                 const phoneInt = Number(this.phone);
 
@@ -239,8 +236,6 @@ export default {
                         spaces: item.spaces,
                     })),
                 };
-
-
                 try {
                     const response = await fetch(this.api + "/orders", {
                         method: "POST",
@@ -249,7 +244,7 @@ export default {
                     });
 
                     if (response.ok) {
-                        // Call the new PUT route to update available spaces
+                        // call the new PUT route to update spaces
                         await this.updateAvailableSpaces(orderData.cartItems);
 
                         alert("Thank You for your order, click OK to go the Home page.");
@@ -264,7 +259,7 @@ export default {
                 }
             }
         },
-        // Update available spaces in the lessons collection
+        // update available spaces in the lessons collection
         async updateAvailableSpaces(cartItems) {
             try {
                 for (const cartItem of cartItems) {
@@ -272,12 +267,12 @@ export default {
                     if (lesson) {
                         lesson.spaces -= cartItem.spaces;
                         if (lesson.spaces < 0) {
-                            lesson.spaces = 0; // Ensure spaces don't go below zero
+                            lesson.spaces = 0;
                         }
                     }
                 }
 
-                const orderId = await this.getLatestOrderId(); // Assuming there's a route to get the latest order ID
+                const orderId = await this.getLatestOrderId();
                 const response = await fetch(this.api + `/orders/${orderId}`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
@@ -286,14 +281,12 @@ export default {
 
                 if (!response.ok) {
                     console.error("Error updating available spaces:", response.statusText);
-                    // Handle error as needed
                 }
             } catch (error) {
                 console.error("Error updating available spaces:", error);
-                // Handle error as needed
             }
         },
-        // Get the latest order ID
+        // latest order ID
         async getLatestOrderId() {
             try {
                 const response = await fetch(this.api + "/orders");
@@ -307,7 +300,3 @@ export default {
     },
 };
 </script>
-
-<style scoped>
-/* Add your styles here */
-</style>

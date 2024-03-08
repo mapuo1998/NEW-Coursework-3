@@ -14,7 +14,3 @@ export default {
   }
 };
 </script>
-
-<style>
-/* Add global styles if needed */
-</style>
